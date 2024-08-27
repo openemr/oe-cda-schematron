@@ -24,7 +24,7 @@
     "mocha": "^3.2.0"
   },
   "dependencies": {
-    "xmldom": "0.5.0",
+    "xmldom": "0.7.7",
     "xpath": "0.0.23"
   }
 }
