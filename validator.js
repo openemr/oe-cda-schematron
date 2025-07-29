@@ -8,7 +8,8 @@ module.exports = {
 
 var fs = require('fs');
 var xpath = require('xpath');
-var dom = require('xmldom').DOMParser;
+const { DOMParser, XMLSerializer } = require('@xmldom/xmldom');
+
 var crypto = require('crypto');
 
 var parseSchematron = require('./parseSchematron');
@@ -53,7 +54,7 @@ function validate(xml, schematron, options) {
     }
     
     // Load xml doc
-    var xmlDoc = new dom().parseFromString(xml);
+    var xmlDoc = new DOMParser().parseFromString(xml);
     
     var hash = crypto.createHash('md5').update(schematron).digest('hex');
     var s = parsedMap[hash];
@@ -61,7 +62,7 @@ function validate(xml, schematron, options) {
     // If not in cache
     if (!s) {
         // Load schematron doc
-        var schematronDoc = new dom().parseFromString(schematron);
+        var schematronDoc = new DOMParser().parseFromString(schematron);
 
         // Parse schematron
         var s = parseSchematron(schematronDoc);

@@ -4,7 +4,7 @@ module.exports = modifyTest;
 
 var fs = require('fs');
 var xpath = require('xpath');
-var dom = require('xmldom').DOMParser;
+const { DOMParser, XMLSerializer } = require('@xmldom/xmldom');
 var path_module = require('path');
 
 var loadedExternalDocuments = {};
@@ -59,7 +59,7 @@ function modifyTest(test, resourceDir) {
             catch (err) {
                 throw new Error('No such file \'' + filepath + '\'');
             }
-            externalDoc = new dom().parseFromString(externalXml);
+            externalDoc = new DOMParser().parseFromString(externalXml);
             loadedExternalDocuments[filepath] = externalDoc;
         }
         else {
